@@ -4,78 +4,206 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>寝過ごしナシ | 近日公開 事前登録</title>
-<meta name="description" content="降りる駅に近づいたら、GPSで起こすアラーム。 Androidアプリ「寝過ごしナシ」の事前登録。">
-<meta property="og:title" content="寝過ごしナシ — 降りる駅に近づいたら、GPSで起こすアラーム。">
+<meta name="description" content="降りる駅が近づいたら、GPSで起こす。 Androidアプリ「寝過ごしナシ」の事前登録。">
+<meta property="og:title" content="寝過ごしナシ | 降りる駅が近づいたら、GPSで起こす。">
 <meta property="og:description" content="近日公開のAndroidアプリ。事前登録が多ければ優先してリリースします。">
 <meta property="og:image" content="https://is-gts.github.io/nesugoshi/og.png">
 <meta property="og:url" content="https://is-gts.github.io/nesugoshi/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#c2410c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--fg:#1a1d21;--muted:#5c6470;--line:#e3e6ea;--accent:#2563eb;--ok:#15803d}
-@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#181b21;--fg:#eceef1;--muted:#9aa3ad;--line:#2a2f37;--accent:#60a5fa;--ok:#4ade80}}
+:root{--bg:#fafaf9;--bg2:#f4f4f3;--fg:#18181b;--muted:#5b5b63;--line:#e4e4e7;--card:#ffffff;--accent:#c2410c;--accent-fg:#ffffff;--soft:color-mix(in srgb,#c2410c 9%,#fafaf9);--soft2:color-mix(in srgb,#c2410c 18%,#fafaf9);--ok:#15803d;--shadow:0 20px 60px -20px color-mix(in srgb,#c2410c 35%,transparent)}
+@media(prefers-color-scheme:dark){:root{--bg:#121214;--bg2:#18181b;--fg:#f4f4f5;--muted:#a1a1aa;--line:#2a2a30;--card:#1c1c21;--accent:#fb923c;--accent-fg:#101012;--soft:color-mix(in srgb,#fb923c 12%,#121214);--soft2:color-mix(in srgb,#fb923c 22%,#121214);--ok:#4ade80;--shadow:0 20px 60px -20px rgba(0,0,0,.6)}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif}
-main{max-width:560px;margin:0 auto;padding:48px 16px 64px}
-.icon{font-size:64px;line-height:1;margin-bottom:12px}
-h1{font-size:clamp(30px,7vw,42px);line-height:1.25;margin:0 0 8px}
-.pitch{font-size:20px;font-weight:600;margin:0 0 20px}
-ul{margin:0 0 28px;padding-left:20px;color:var(--muted)}
-.badge{display:inline-block;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin-bottom:16px}
-form{display:flex;gap:8px}
-input[type=email]{flex:1;min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg);font-size:16px}
-button{padding:12px 18px;border:0;border-radius:8px;background:var(--accent);color:#fff;font-weight:600;font-size:16px;cursor:pointer;white-space:nowrap}
-button:disabled{opacity:.6;cursor:default}
-.msg{font-size:14px;min-height:1.4em;margin:8px 0 0}
-.msg.ok{color:var(--ok)}
-.hp{position:absolute;left:-9999px}
-.features{margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
-.features h2{font-size:22px;margin:0 0 20px}
-.features dl{margin:0;display:grid;gap:18px}
-.features dt{font-weight:600;margin:0 0 2px}
-.features dd{margin:0;color:var(--muted);font-size:15px}
-footer{margin-top:40px;color:var(--muted);font-size:13px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:900;font-size:18px;display:flex;align-items:center;gap:10px}
+.brand i{width:12px;height:12px;border-radius:4px;background:var(--accent);display:inline-block}
+.tag{font-size:13px;color:var(--muted);font-weight:500}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:16px 0 72px;min-height:calc(100dvh - 64px)}
+.hero h1{font-size:clamp(32px,4vw,46px);line-height:1.22;font-weight:900;letter-spacing:-.01em;margin:0 0 18px}
+.hero p.sub{font-size:17px;color:var(--muted);margin:0 0 28px;max-width:34em}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--accent);background:var(--soft);padding:5px 12px;border-radius:999px;margin-bottom:18px}
+
+.reg label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.reg .row{display:flex;gap:8px}
+.reg input[type=email]{flex:1;min-width:0;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--fg);font:inherit;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.reg input[type=email]::placeholder{color:#8a8a93}
+.reg input[type=email]:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px var(--soft2)}
+.reg button{padding:13px 22px;border:0;border-radius:12px;background:var(--accent);color:var(--accent-fg);font:inherit;font-weight:700;font-size:16px;cursor:pointer;white-space:nowrap;transition:transform .12s,filter .2s}
+.reg button:hover{filter:brightness(1.08)}
+.reg button:active{transform:scale(.97)}
+.reg button:disabled{opacity:.55;cursor:default;transform:none}
+.msg{font-size:14px;min-height:1.5em;margin:8px 0 0;color:var(--muted)}
+.msg.ok{color:var(--ok);font-weight:700}
+.msg.err{color:#dc2626}
+.hp{position:absolute;left:-9999px;width:1px;height:1px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+
+.stage{display:flex;justify-content:center;position:relative}
+.stage::before{content:"";position:absolute;inset:10% -10% 0;background:radial-gradient(60% 60% at 50% 60%,var(--soft2),transparent 70%);z-index:0;pointer-events:none}
+.phone{position:relative;z-index:1;width:300px;aspect-ratio:9/18.5;border-radius:38px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow),0 0 0 8px color-mix(in srgb,var(--fg) 6%,transparent);padding:48px 16px 20px;overflow:hidden;transform:rotate(-3deg)}
+.phone::before{content:"";position:absolute;top:14px;left:50%;width:84px;height:22px;transform:translateX(-50%);border-radius:999px;background:color-mix(in srgb,var(--fg) 85%,var(--bg))}
+.m-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.m-top span{font-size:12px;color:var(--muted)}
+.m-top strong{font-size:22px;font-weight:900}
+.m-row{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-radius:12px;background:var(--bg2);margin-bottom:8px;font-size:13px}
+.m-row b{display:block;font-weight:700}
+.m-row small{color:var(--muted);font-size:11px}
+.m-row em{font-style:normal;color:var(--muted);font-size:12px;white-space:nowrap}
+.m-row.m-hot{background:var(--soft2)}
+.m-row.m-hot em{color:var(--accent);font-weight:700}
+.m-route{position:relative;margin:6px 0 14px}
+.m-route::before{content:"";position:absolute;left:5px;top:12px;bottom:12px;width:2px;background:var(--line)}
+.m-st{display:grid;grid-template-columns:12px 1fr auto;gap:12px;align-items:center;padding:9px 0;font-size:13px;position:relative}
+.m-st i{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);background:var(--card)}
+.m-st small{color:var(--muted);font-size:11px}
+.m-st.done i{background:var(--line)}
+.m-st.now i{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px var(--soft2)}
+.m-st.alert i{border-color:var(--accent)}
+.m-st.alert small{color:var(--accent);font-weight:700}
+.m-cta{margin-top:10px;text-align:center;padding:11px;border-radius:12px;background:var(--accent);color:var(--accent-fg);font-weight:700;font-size:13px}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.m-food{padding:10px 11px;border-radius:12px;background:var(--bg2);font-size:13px}
+.m-food b{display:block;font-weight:700}
+.m-food em{font-style:normal;font-size:11px;color:var(--muted)}
+.m-food.hot{background:var(--soft2)} .m-food.hot em{color:var(--accent);font-weight:700}
+.m-food.warn em{color:var(--accent)}
+.m-emoji{display:flex;justify-content:space-between;font-size:26px;margin:4px 2px 14px}
+.m-emoji span{padding:6px;border-radius:12px;line-height:1}
+.m-emoji .sel{background:var(--soft2);box-shadow:0 0 0 2px var(--accent)}
+.m-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:12px}
+.m-cal i{aspect-ratio:1;border-radius:8px;background:var(--bg2)}
+.m-cal i.a{background:var(--accent)} .m-cal i.b{background:color-mix(in srgb,var(--accent) 55%,var(--bg2))} .m-cal i.c{background:color-mix(in srgb,var(--accent) 30%,var(--bg2))}
+.m-cal i.now{box-shadow:inset 0 0 0 2px var(--accent)}
+
+section{padding:72px 0}
+section h2{font-size:clamp(26px,3.4vw,36px);font-weight:900;letter-spacing:-.01em;line-height:1.3;margin:0 0 10px}
+section .lead{color:var(--muted);margin:0 0 36px;max-width:36em}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat article{padding:26px 24px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.feat article:nth-child(1){grid-column:span 2;background:var(--soft)}
+.feat article:nth-child(4){background:var(--soft)}
+.feat h3{margin:0 0 8px;font-size:17px;font-weight:700}
+.feat p{margin:0;color:var(--muted);font-size:14.5px}
+
+.faq{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:4px 0}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-weight:400;font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin:0 0 18px;color:var(--muted);max-width:40em}
+
+.final{text-align:center}
+.final .lead{margin-left:auto;margin-right:auto}
+.final .reg{max-width:480px;margin:0 auto;text-align:left}
+footer{padding:24px 0 40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+
+@media(prefers-reduced-motion:no-preference){
+.hero>*{animation:up .7s cubic-bezier(.16,1,.3,1) both}
+.hero>.stage{animation-delay:.15s}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media(max-width:860px){
+.hero{grid-template-columns:1fr;gap:40px;padding:24px 0 56px;min-height:0}
+.stage{order:2}
+.phone{width:260px;transform:none}
+.feat{grid-template-columns:1fr}
+.feat article:nth-child(1){grid-column:auto}
+section{padding:56px 0}
+}
+@media(max-width:420px){.reg .row{flex-direction:column}.reg button{width:100%}}
 </style>
 </head>
 <body>
-<main>
-<div class="icon">🚃</div>
-<span class="badge">Android · 近日公開</span>
-<h1>寝過ごしナシ</h1>
-<p class="pitch">降りる駅に近づいたら、GPSで起こすアラーム。</p>
-<ul><li>駅を選ぶだけ、時刻設定は不要</li><li>手前の駅を通過したらバイブ＋音で通知</li><li>乗り換えにも対応</li></ul>
-<form><input type="email" name="email" placeholder="メールアドレス" required autocomplete="email"><input class="hp" name="hp" tabindex="-1" autocomplete="off"><button>事前登録</button></form>
-<p class="msg"></p>
-<section class="features">
-<h2>できること</h2>
-<dl>
-<dt>駅を選ぶだけのアラーム</dt><dd>降りる駅を選ぶだけで設定完了。到着時刻を計算したり、タイマーをかけたりする必要はありません。</dd>
-<dt>GPSで位置を判定</dt><dd>電車の遅延や各駅停車・快速の違いに関係なく、実際の現在地で判定するので確実に起こします。</dd>
-<dt>手前の駅で通知</dt><dd>降車駅の1〜2駅手前を通過した時点でバイブ＋音で通知。降りる準備の時間を確保できます。</dd>
-<dt>乗り換えにも対応</dt><dd>乗り換えがある経路は、各乗り換え駅でも順番に通知します。</dd>
-<dt>よく使う駅をお気に入り登録</dt><dd>通勤・通学の駅を登録しておけば、ワンタップでアラームを開始できます。</dd>
-<dt>バッテリーにやさしい設計</dt><dd>降車駅から離れている間は位置取得の頻度を落とし、電池消費を抑えます。</dd>
-</dl>
+<div class="wrap">
+<header><div class="brand"><i></i>寝過ごしナシ</div><span class="tag">Android アプリ</span></header>
+
+<section class="hero">
+<div>
+<span class="eyebrow">近日公開</span>
+<h1>降りる駅が近づいたら、<br>GPSで起こす。</h1>
+<p class="sub">駅を選ぶだけ。到着時刻の計算もタイマーも不要で、手前の駅を通過したらバイブと音で起こします。</p>
+<form class="reg" novalidate>
+<label for="email-hero">メールアドレス</label>
+<div class="row"><input id="email-hero" type="email" name="email" placeholder="you@example.com" required autocomplete="email" inputmode="email"><input class="hp" name="hp" tabindex="-1" autocomplete="off"><button type="submit">事前登録</button></div>
+<p class="msg" aria-live="polite"></p>
+</form>
+<p class="note">登録は無料。公開時にメールで1通だけお知らせします。</p>
+</div>
+<div class="stage"><div class="phone" aria-hidden="true">
+<div class="m-top"><span>降車駅</span><strong>新宿</strong></div>
+<div class="m-route">
+<div class="m-st done"><i></i><b>渋谷</b><small>通過</small></div>
+<div class="m-st now"><i></i><b>原宿</b><small>現在地</small></div>
+<div class="m-st alert"><i></i><b>代々木</b><small>ここで通知</small></div>
+<div class="m-st"><i></i><b>新宿</b><small>降車</small></div>
+</div>
+<div class="m-cta">アラーム作動中</div>
+</div></div>
 </section>
-<footer>登録は無料。公開時にメールで1通だけお知らせします。メールアドレスはリリース通知のみに使用し、第三者には提供しません。</footer>
-</main>
+
+<section id="features">
+<h2>できること</h2>
+<p class="lead">「寝過ごしナシ」で使える機能です。事前登録の数を見て開発に入るため、内容は変わることがあります。</p>
+<div class="feat">
+<article><h3>駅を選ぶだけ</h3><p>降りる駅を選べば設定完了。時刻を計算したり、タイマーをかけたりする必要はありません。</p></article>
+<article><h3>GPSで位置を判定</h3><p>遅延や各駅停車・快速の違いに関係なく、実際の現在地で判定。確実に起こします。</p></article>
+<article><h3>手前の駅で通知</h3><p>降車駅の1〜2駅手前を通過した時点でバイブと音で通知。降りる準備の時間が取れます。</p></article>
+<article><h3>乗り換えにも対応</h3><p>乗り換えがある経路は、各乗り換え駅でも順番に通知します。</p></article>
+<article><h3>よく使う駅をお気に入り</h3><p>通勤・通学の駅を登録しておけば、ワンタップでアラームを開始できます。</p></article>
+<article><h3>電池にやさしい</h3><p>降車駅から遠い間は位置取得の頻度を落とし、電池の消費を抑えます。</p></article>
+</div>
+</section>
+</div>
+
+<section class="faq"><div class="wrap">
+<h2>よくある質問</h2>
+<details><summary>地下鉄でも使えますか？</summary><p>地下ではGPSが届きにくいため、地下区間では駅間の所要時間から推定する方式を検討しています。地上路線が最も確実です。</p></details>
+<details><summary>音は鳴りますか？</summary><p>バイブのみ、音のみ、両方から選べます。イヤホン使用時はイヤホンから鳴らします。</p></details>
+<details><summary>いつ公開されますか？</summary><p>事前登録の数で優先順位を決めます。着手後は2〜3か月を目安にしています。</p></details>
+</div></section>
+
+<div class="wrap">
+<section class="final">
+<h2>欲しいと思ったら、事前登録を。</h2>
+<p class="lead">登録が多いアプリから順に作ります。あなたの1票で優先順位が決まります。</p>
+<form class="reg" novalidate>
+<label for="email-final">メールアドレス</label>
+<div class="row"><input id="email-final" type="email" name="email" placeholder="you@example.com" required autocomplete="email" inputmode="email"><input class="hp" name="hp" tabindex="-1" autocomplete="off"><button type="submit">事前登録</button></div>
+<p class="msg" aria-live="polite"></p>
+</form>
+</section>
+<footer>メールアドレスはリリース通知のみに使用し、第三者には提供しません。</footer>
+</div>
+
 <script>
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbyzV1WIYIxnYVrx0GkV5e0CbnglA2Yu3JSZlw0mKB-JGQSZEI5FeUPZIB5cYhRjBg8wOw/exec";
 const APP = "nesugoshi", KEY = "preregistered-" + APP;
-const form = document.querySelector("form"), msg = document.querySelector(".msg");
-const mark = () => { form.querySelector("button").disabled = true; form.querySelector("input[type=email]").disabled = true; msg.textContent = "登録済みです。公開時にお知らせします。"; msg.className = "msg ok"; };
-if (localStorage.getItem(KEY)) mark();
-form.addEventListener("submit", async e => {
+const forms = [...document.querySelectorAll("form.reg")];
+const markAll = () => forms.forEach(f => { f.querySelector("button").disabled = true; f.querySelector("input[type=email]").disabled = true; const m = f.querySelector(".msg"); m.textContent = "登録済みです。公開時にお知らせします。"; m.className = "msg ok"; });
+if (localStorage.getItem(KEY)) markAll();
+forms.forEach(form => form.addEventListener("submit", async e => {
   e.preventDefault();
+  const input = form.querySelector("input[type=email]"), msg = form.querySelector(".msg"), btn = form.querySelector("button");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) { msg.textContent = "メールアドレスの形式を確認してください。"; msg.className = "msg err"; input.focus(); return; }
   const fd = new FormData(form);
   fd.append("app", APP); fd.append("ref", document.referrer); fd.append("ua", navigator.userAgent);
-  form.querySelector("button").disabled = true; msg.className = "msg"; msg.textContent = "送信中…";
+  btn.disabled = true; msg.className = "msg"; msg.textContent = "送信中…";
   try {
     await fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: fd });
-    localStorage.setItem(KEY, "1"); mark();
+    localStorage.setItem(KEY, "1"); markAll();
   } catch {
-    form.querySelector("button").disabled = false; msg.textContent = "送信に失敗しました。もう一度お試しください。";
+    btn.disabled = false; msg.textContent = "送信に失敗しました。もう一度お試しください。"; msg.className = "msg err";
   }
-});
+}));
 </script>
 </body>
 </html>
